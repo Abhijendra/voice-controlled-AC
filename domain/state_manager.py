@@ -93,20 +93,3 @@ class ACStateManager:
             return {"status": "blocked", "reason": "ac_off"}        
         self._state.timer_on_hours = hours
         return {"status": "success", "message": f"on timer set for {hours} hours"}
-    
-# state = ACState()
-# constraints = ACConstraints()
-# manager = ACStateManager(state, constraints)
-
-# print(manager.set_power("on"))
-# print(manager.change_temperature(-1))
-# print(manager.set_turbo("on"))
-
-# print(manager.snapshot())
-    
-        
-
-        
-
-        
-

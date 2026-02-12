@@ -1,54 +1,43 @@
-from services.command_router import CommandRouter
-from domain.state_manager import ACStateManager
 from domain.state_manager import ACState
 from domain.state_manager import ACConstraints
-
+from domain.state_manager import ACStateManager
+from services.command_router import CommandRouter
 from nlp.interpreter import CommandInterpreter
-
-interpreter = CommandInterpreter()
-intent_json = interpreter.interpret("switch on the AC please")
 
 state = ACState()
 constraints = ACConstraints()
 
 manager = ACStateManager(state, constraints)
-
 router = CommandRouter(manager)    
+interpreter = CommandInterpreter()
 
-command_output = router.route(intent_json)
-print(command_output)
+print("\nAC Assistant Started...")
+print("Type 'exit' to quit.\n")
+def main():
+    while True:
+        user_input = input("Input Your Command : ")
+        if user_input.lower() in ("exit", "quit"):
+            print("Bye.")
+            break
 
-# command_output = router.route({
-#     "intent": "power",
-#     "state": "on"
-# })
+        # NLP
+        command = interpreter.interpret(user_input)
+        print("Intent:", command)
 
-# command_output = router.route({
-#     "intent": "change_temperature",
-#     "delta": -1
-# })
-# print(command_output)
+        # if rejected by interpreter
+        if command.get("status") == "rejected":
+            print("System:", command)
+            continue
 
-# command_output = router.route({
-#     "intent": "turbo",
-#     "state": "on"
-# })
-# print(command_output)
+        # Execute
+        result = router.route(command)
+        print("Execution:", result)
 
-# command_output = router.route({
-#     "intent": "turbo",
-#     "state": "on"
-# })
-# print(command_output)
+        # Show updated state
+        print("State:", manager.snapshot())
+        print("-" * 50)
 
-# command_output = router.route({
-#     "intent": "power",
-#     "state": "off"
-# })
-# print(command_output)
 
-# command_output = router.route({
-#     "intent": "change_temperature",
-#     "delta": -1
-# })
-# print(command_output)
+
+if __name__ == "__main__":
+    main()
