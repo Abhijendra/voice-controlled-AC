@@ -1,0 +1,10 @@
+Response Framework:
+
+{
+  "status": "",
+  "intent": "",
+  "params": {},
+  "reason": "",
+  "message": "",
+  "allowed": []
+}
