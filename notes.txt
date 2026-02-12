@@ -8,3 +8,35 @@ Response Framework:
   "message": "",
   "allowed": []
 }
+
+
+possible command dictionaries = 
+
+{
+  "intent": "power",
+  "state": "on"  
+}
+
+{
+  "intent": "change_temperature",
+  "delta": -1
+}
+
+{
+  "intent": "set_temperature",
+  "value": 24
+}
+
+{
+  "intent": "set_fan_speed",
+  "value": "auto"
+}
+
+{
+  "intent": "turbo",
+  "state": "on"
+}
+
+
+
+
